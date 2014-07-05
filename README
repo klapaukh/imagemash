@@ -1,0 +1,16 @@
+imagemash asksusers to rate pairs of images against each other.
+
+imagemash expects to find its images in the images/ directory. It will
+pick several unique pairs of image to show each user and record which of
+the pair they chose.
+
+Several parts of the output can be customised by filling in the files in
+the template directory:
+- template/head.html is included in the <head> of the document.
+- template/header.html is included immediately inside the <body>.
+- template/footer.html is included immediately before the </body>.
+- template/thank-you.html is shown when users have rated all pairs.
+
+imagemash is distributed under the GNU Affero General Public Licence,
+version 3.0 or later. There is a link on every page to obtain the
+running source code.

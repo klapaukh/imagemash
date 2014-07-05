@@ -1,0 +1,50 @@
+#pairs {
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.pair {
+    position: relative;
+    padding: 5px;
+    background: #888;
+    clear: left;
+    display: none;
+    overflow: auto;
+    min-height: 400px;
+}
+
+.image {
+    width: 50%;
+    display: none;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.pair.active {
+    display: block;
+}
+
+.pair.active .image {
+    display: inline;
+}
+
+.image:hover {
+    background: #eee;
+}
+
+#counter {
+    position: absolute;
+    visibility: hidden;
+    left: 0px;
+    width: 100px;
+    background: #888;
+    font-size: 40px;
+}
+
+h1 {
+    text-align: center;
+}
