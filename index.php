@@ -86,7 +86,7 @@ function generate_zip() {
         }
     }
     if (!$must_regenerate)
-        return true;
+        return filesize("imagemash.zip");
     unlink("imagemash.zip");
     $zip = new ZipArchive();
     if ($zip->open("imagemash.zip", ZipArchive::CREATE) !== TRUE) {
@@ -96,19 +96,24 @@ function generate_zip() {
         $zip->addFile($f, "imagemash/$f");
     }
     $zip->close();
-    return true;
+    return filesize("imagemash.zip");
 }
 
 function get_source() {
 ?>
 <!DOCTYPE html>
 <html>
- <head><title>Download imagemash source</title></head>
+ <head>
+  <title>Download imagemash source</title>
+  <style type="text/css">html { overflow: hidden; min-width: 300px;}</style>
+ </head>
  <body>
-  <h1>Download imagemash source</h1>
+ <?php if (!$_REQUEST['embed']) {?>  <h1>Download imagemash source</h1><?php }?>
 <?php
-    if (generate_zip()) {
-        echo '<a href="imagemash.zip">Download</a>';
+    if ($size = generate_zip()) {
+        echo '<p><a href="imagemash.zip">Download</a>';
+        echo " (zip, $size bytes)</p>";
+        echo "<p>This is the live source code in use on this site.</p>";
     } else {
         echo 'There was an error generating a download zip for this site. ';
         echo 'You can get the main-line source from: ';
@@ -119,6 +124,8 @@ function get_source() {
 </html>
 <?php
 }
+
+header("Content-type: text/html; charset=utf-8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     # Saving results
@@ -178,7 +185,7 @@ for ($i = 0; $i < $pairs; $i++) {
     Powered by <a href="https://github.com/mwh/imagemash">imagemash</a>,
     distributed under
     <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL 3.0</a>.
-    <a href="?get=source">Get the source</a>.
+    <a href="?get=source" id="get-source">Get the source</a>.
    </small>
   </div>
 <?php output_template("footer.html");?>

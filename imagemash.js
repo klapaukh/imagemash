@@ -13,6 +13,25 @@ window.addEventListener('load', function() {
     var counter = document.getElementById('counter');
     counter.style.left = (pairs[0].offsetLeft - 100 + counter.offsetLeft) + 'px';
     counter.style.visibility = 'visible';
+    var sourcelink = document.getElementById('get-source');
+    sourcelink.addEventListener('click', function(e) {
+        e.preventDefault();
+        var obj = document.createElement('object');
+        obj.style.border = '2px solid black';
+        obj.style.position = 'absolute';
+        obj.style.width = this.offsetWidth + 'px';
+        obj.style.height = '0px';
+        obj.style.display = 'block';
+        obj.style.zIndex = '100';
+        obj.style.top = this.offsetTop + this.offsetHeight + 'px';
+        obj.style.left = this.offsetLeft + 'px';
+        obj.addEventListener('load', function() {
+            obj.style.width = '300px';
+            obj.style.height = (obj.contentDocument.body.offsetHeight + 30) + 'px';
+        });
+        obj.data = this.href + '&embed=1';
+        document.body.appendChild(obj);
+    });
 });
 
 function imageClicked() {
