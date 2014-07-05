@@ -48,6 +48,11 @@ function output_template($name) {
 }
 
 function log_winner($winner, $loser) {
+    $images = get_images();
+    if (!array_key_exists($winner, $images))
+        return;
+    if (!array_key_exists($loser, $images))
+        return;
     $fp = fopen("results.txt", "a");
     fwrite($fp, "$winner > $loser\n");
     fclose($fp);
