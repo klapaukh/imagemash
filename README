@@ -1,11 +1,20 @@
-imagemash asksusers to rate pairs of images against each other.
+imagemash asks users to rate pairs of images against each other.
 
 imagemash expects to find its images in the images/ directory. It will
 pick several unique pairs of image to show each user and record which of
 the pair they chose.
 
+Results are recorded into results.txt in the format:
+  winner > loser
+where the names are derived from the image filenames.
+
+You can set what the images should be referred to ask, what property
+you're asking about, and how many pairs to show each visitor in
+config.php. Copy config.example.php to config.php and modify to suit
+your needs.
+
 Several parts of the output can be customised by filling in the files in
-the template directory:
+the template/ directory:
 - template/head.html is included in the <head> of the document.
 - template/header.html is included immediately inside the <body>.
 - template/footer.html is included immediately before the </body>.
