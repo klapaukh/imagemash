@@ -69,14 +69,16 @@ function generate_zip() {
         "agpl-3.0.txt",
         "README"
     );
-    $must_regenerate = !file_exists("imagemash.zip");
+    $must_regenerate = true;
+    if (file_exists("imagemash.zip"))
+        $must_regenerate = false;
     if (!$must_regenerate) {
         $ziptime = filemtime("imagemash.zip");
         $must_regenerate = !$ziptime;
         if (!$must_regenerate) {
             foreach ($files as $f) {
                 $ftime = filemtime($f);
-                if ($f >= $ziptime) {
+                if ($ftime >= $ziptime) {
                     $must_regenerate = true;
                     break;
                 }
