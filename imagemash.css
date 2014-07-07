@@ -1,5 +1,6 @@
 #pairs {
     width: 1024px;
+    max-width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
@@ -12,7 +13,7 @@
     clear: left;
     display: none;
     overflow: auto;
-    min-height: 400px;
+    min-height: 200px;
 }
 
 .image {
@@ -23,6 +24,10 @@
     padding-bottom: 10px;
     text-align: center;
     cursor: pointer;
+}
+
+.image img {
+    max-width: 95%;
 }
 
 .pair.active {
