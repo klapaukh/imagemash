@@ -54,7 +54,8 @@ function log_winner($winner, $loser) {
     if (!array_key_exists($loser, $images))
         return;
     $fp = fopen("results.txt", "a");
-    fwrite($fp, "$winner > $loser\n");
+    $token = file_get_contents("php://input");
+    fwrite($fp, "$winner > $loser $token\n");
     fclose($fp);
 }
 
