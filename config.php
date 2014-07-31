@@ -13,3 +13,6 @@ $pairs = 10;
 
 # What should the page title be?
 $title = "Pick an image";
+
+# Which pair of images should be repeated
+$repeat = 3
