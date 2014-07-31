@@ -152,14 +152,12 @@ if ($_REQUEST['get'] == 'source') {
  </head>
  <body>
 <?php output_template("header.html"); ?>
-  <h1>Which of these <?php echo $nouns?> is <?php echo $adjective?>?</h1>
+<div class="heading">
+<div class="introtext"><img src="vuw-logo.jpg" alt="VUW logo" width="20%"/></div>
+        <h1>Which of these <?php echo $nouns?> is <?php echo $adjective?>?</h1>
+        </div>
    <div id="pairs">
 
-    <div id="counter">
-     <span id="counter-upto">-</span>
-     /
-     <span id="counter-of"><?php echo $pairs?></span>
-    </div>
     <div class="pair active" id="info">
     <?php output_template("first.html"); ?>
     </div><?php
@@ -167,7 +165,7 @@ $images = get_images();
 
 for ($i = 0; $i < $pairs; $i++) {
     $pair = pick_pair($images);
-    if($pair > 3 && $i == $pairs-1){
+    if($repeat > 0 && $i == $pairs-1){
             $pair = $saved_pair;
     }else if($i == $repeat){
             $saved_pair = array_reverse($pair);
@@ -189,6 +187,11 @@ for ($i = 0; $i < $pairs; $i++) {
    <div class="pair" id="thank-you">
 <?php output_template("thank-you.html"); ?>
    </div>
+    <div id="counter">
+     <span id="counter-upto">-</span>
+     /
+     <span id="counter-of"><?php echo $pairs?></span>
+    </div>
   </div>
   <div style="clear: both;">
    <small>

@@ -9,15 +9,16 @@
 .pair {
     position: relative;
     padding: 5px;
-    background: #888;
+    background: #FFFFFF;
     clear: left;
     display: none;
     overflow: auto;
-    min-height: 200px;
+    min-height: 450px;
 }
 
 .image {
     width: 50%;
+    vertical-align: bottom;
     display: none;
     float: left;
     padding-top: 10px;
@@ -43,13 +44,28 @@
 }
 
 #counter {
-    position: absolute;
     visibility: hidden;
     left: 0px;
-    width: 100px;
-    background: #888;
+    width: 100%;
+    background: #FFFFFF;
     font-size: 40px;
+    text-align: center;
 }
+
+.heading {
+         background: #FFFFFF;
+         padding-bottom: 1px;
+    width: 1024px;
+    max-width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+.introtext {
+  text-align: center;
+}
+
 
 h1 {
     text-align: center;
@@ -58,4 +74,8 @@ h1 {
 object {
     transition: 0.5s width 0.5s, height 0.5s;
     background: #eee;
+}
+
+body {
+        background: #20C02D;
 }

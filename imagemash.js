@@ -11,8 +11,7 @@ window.addEventListener('load', function() {
         }
     }
     var counter = document.getElementById('counter');
-    counter.style.left = (pairs[0].offsetLeft - 100 + counter.offsetLeft) + 'px';
-    counter.style.visibility = 'visible';
+    counter.style.left = (pairs[0].offsetLeft) + 'px';
     var sourcelink = document.getElementById('get-source');
     sourcelink.addEventListener('click', function(e) {
         e.preventDefault();
@@ -35,6 +34,8 @@ window.addEventListener('load', function() {
 });
 
 function start(){
+    var counter = document.getElementById('counter');
+    counter.style.visibility = 'visible';
     pairs[activePairIndex++].classList.remove('active');
     pairs[activePairIndex].classList.add('active');
     var cu = document.getElementById('counter-upto');
