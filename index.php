@@ -56,7 +56,7 @@ function log_winner($winner, $loser) {
     $token = file_get_contents("php://input");
     $fp = fopen("results.txt", "a");
     flock($fp, LOCK_EX);
-    fwrite($fp, "$winner > $loser $token\n");
+    fwrite($fp, "$winner,$loser,$token\n");
     fclose($fp);
 }
 
@@ -65,7 +65,7 @@ function generate_zip() {
         "index.php",
         "imagemash.css",
         "imagemash.js",
-        "config.example.php",
+        "config.php",
         "images/index.html",
         "template/index.html",
         "agpl-3.0.txt",
@@ -170,7 +170,7 @@ for ($i = 0; $i < $pairs; $i++) {
     if($pair > 3 && $i == $pairs-1){
             $pair = $saved_pair;
     }else if($i == $repeat){
-            $saved_pair = $pair;
+            $saved_pair = array_reverse($pair);
     }
 ?>
    <div class="pair">
