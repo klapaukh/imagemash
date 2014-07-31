@@ -15,4 +15,4 @@ $pairs = 10;
 $title = "Pick an image";
 
 # Which pair of images should be repeated
-$repeat = 3
+$repeat = 3;
