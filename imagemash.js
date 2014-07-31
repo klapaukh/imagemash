@@ -34,6 +34,14 @@ window.addEventListener('load', function() {
     });
 });
 
+function start(){
+    pairs[activePairIndex++].classList.remove('active');
+    pairs[activePairIndex].classList.add('active');
+    var cu = document.getElementById('counter-upto');
+    cu.removeChild(cu.lastChild);
+    cu.appendChild(document.createTextNode(activePairIndex))
+}
+
 function imageClicked() {
     var me = this.dataset.me;
     var other = this.dataset.other;
@@ -43,7 +51,7 @@ function imageClicked() {
     if (activePairIndex < pairs.length - 1) {
         var cu = document.getElementById('counter-upto');
         cu.removeChild(cu.lastChild);
-        cu.appendChild(document.createTextNode(activePairIndex + 1))
+        cu.appendChild(document.createTextNode(activePairIndex))
     }
 }
 
