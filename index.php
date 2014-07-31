@@ -53,8 +53,9 @@ function log_winner($winner, $loser) {
         return;
     if (!array_key_exists($loser, $images))
         return;
-    $fp = fopen("results.txt", "a");
     $token = file_get_contents("php://input");
+    $fp = fopen("results.txt", "a");
+    flock($fp, LOCK_EX);
     fwrite($fp, "$winner > $loser $token\n");
     fclose($fp);
 }
@@ -153,18 +154,26 @@ if ($_REQUEST['get'] == 'source') {
 <?php output_template("header.html"); ?>
   <h1>Which of these <?php echo $nouns?> is <?php echo $adjective?>?</h1>
    <div id="pairs">
+
     <div id="counter">
-     <span id="counter-upto">1</span>
+     <span id="counter-upto">-</span>
      /
      <span id="counter-of"><?php echo $pairs?></span>
     </div>
-<?php
+    <div class="pair active" id="info">
+    <?php output_template("first.html"); ?>
+    </div><?php
 $images = get_images();
 
 for ($i = 0; $i < $pairs; $i++) {
     $pair = pick_pair($images);
+    if($pair > 3 && $i == $pairs-1){
+            $pair = $saved_pair;
+    }else if($i == $repeat){
+            $saved_pair = $pair;
+    }
 ?>
-   <div class="pair<?php if (!$i) echo " active";?>">
+   <div class="pair">
     <div class="image" data-me="<?php echo $pair[0]?>" data-other="<?php echo $pair[1]?>">
      <img src="images/<?php echo $images[$pair[0]]?>" />
      <br />is <?php echo $adjective?>
