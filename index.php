@@ -154,7 +154,8 @@ if ($_REQUEST['get'] == 'source') {
 <?php output_template("header.html"); ?>
 <div class="heading">
 <div class="introtext"><img src="vuw-logo.jpg" alt="VUW logo" width="20%"/></div>
-        <h1>Which of these <?php echo $nouns?> is <?php echo $adjective?>?</h1>
+        <h1 id="firstheading">Symmetry Survey</h1>
+        <h1 id="mainheading">Which of these <?php echo $nouns?> is <?php echo $adjective?>?</h1>
         </div>
    <div id="pairs">
 

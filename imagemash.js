@@ -34,6 +34,10 @@ window.addEventListener('load', function() {
 });
 
 function start(){
+    var mainheading = document.getElementById('mainheading');    
+    var firstheading = document.getElementById('firstheading');    
+    firstheading.style.display = 'none';
+    mainheading.style.display = 'block';
     var counter = document.getElementById('counter');
     counter.style.visibility = 'visible';
     pairs[activePairIndex++].classList.remove('active');

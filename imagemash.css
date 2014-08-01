@@ -66,6 +66,13 @@
   text-align: center;
 }
 
+#firstheading{
+        display:block;
+}
+
+#mainheading{
+        display:none;
+}
 
 h1 {
     text-align: center;
