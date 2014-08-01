@@ -50,8 +50,9 @@ function start(){
 function imageClicked() {
     var me = this.dataset.me;
     var other = this.dataset.other;
+    var side = this.dataset.side;
     var count = document.getElementById('counter-upto').innerHTML;
-    logBeat(me, other,count);
+    logBeat(me, other,side,count);
     pairs[activePairIndex++].classList.remove('active');
     pairs[activePairIndex].classList.add('active');
     if (activePairIndex < pairs.length - 1) {
@@ -61,7 +62,7 @@ function imageClicked() {
     }
 }
 
-function logBeat(winner, loser,index) {
+function logBeat(winner, loser, side, index) {
     var log = document.getElementById('log');
     if (log) {
         var li = document.createElement('li');
@@ -70,6 +71,6 @@ function logBeat(winner, loser,index) {
     }
     console.log(index + ": " + winner + ' beat ' + loser);
     var req = new XMLHttpRequest();
-    req.open('POST', '?winner=' + winner + '&loser=' + loser + '&index=' + index, true);
+    req.open('POST', '?winner=' + winner + '&loser=' + loser + '&side=' + side + '&index=' + index, true);
     req.send(token);
 }

@@ -47,16 +47,28 @@ function output_template($name) {
         readfile("template/$name");
 }
 
-function log_winner($winner, $loser, $index) {
+function log_winner($winner, $loser, $side, $index,$pairs) {
     $images = get_images();
     if (!array_key_exists($winner, $images))
         return;
     if (!array_key_exists($loser, $images))
         return;
+    if (!is_numeric($index))
+        return;
+    $index = intval($index);
+    if (($index < 1) or ($index > $pairs)){
+            return;
+    }
+    if($side != "left" and $side != "right"){
+            return;
+    }
     $token = file_get_contents("php://input");
+    if (strlen($token) != 32 or !ctype_xdigit($token)){
+            return;
+    }
     $fp = fopen("results.txt", "a");
-    flock($fp, LOCK_EX);
-    fwrite($fp, "$index,$winner,$loser,$token\n");
+#    flock($fp, LOCK_EX);
+    fwrite($fp, "$side,$index,$winner,$loser,$token\n");
     fclose($fp);
 }
 
@@ -131,7 +143,7 @@ header("Content-type: text/html; charset=utf-8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     # Saving results
-    log_winner($_REQUEST['winner'], $_REQUEST['loser'], $_REQUEST['index']);
+    log_winner($_REQUEST['winner'], $_REQUEST['loser'], $_REQUEST['side'], $_REQUEST['index'], $pairs);
     exit;
 }
 
@@ -174,11 +186,11 @@ for ($i = 0; $i < $pairs; $i++) {
     }
 ?>
    <div class="pair">
-    <div class="image" data-me="<?php echo $pair[0]?>" data-other="<?php echo $pair[1]?>">
+    <div class="image" data-me="<?php echo $pair[0]?>" data-other="<?php echo $pair[1]?>" data-side="left">
      <img src="images/<?php echo $images[$pair[0]]?>" />
      <br />is <?php echo $adjective?>
     </div>
-    <div class="image" data-me="<?php echo $pair[1]?>" data-other="<?php echo $pair[0]?>">
+    <div class="image" data-me="<?php echo $pair[1]?>" data-other="<?php echo $pair[0]?>" data-side="right">
      <img src="images/<?php echo $images[$pair[1]]?>" />
      <br />is <?php echo $adjective?>
     </div>
