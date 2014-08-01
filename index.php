@@ -47,7 +47,7 @@ function output_template($name) {
         readfile("template/$name");
 }
 
-function log_winner($winner, $loser) {
+function log_winner($winner, $loser, $index) {
     $images = get_images();
     if (!array_key_exists($winner, $images))
         return;
@@ -56,7 +56,7 @@ function log_winner($winner, $loser) {
     $token = file_get_contents("php://input");
     $fp = fopen("results.txt", "a");
     flock($fp, LOCK_EX);
-    fwrite($fp, "$winner,$loser,$token\n");
+    fwrite($fp, "$index,$winner,$loser,$token\n");
     fclose($fp);
 }
 
@@ -131,7 +131,7 @@ header("Content-type: text/html; charset=utf-8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     # Saving results
-    log_winner($_REQUEST['winner'], $_REQUEST['loser']);
+    log_winner($_REQUEST['winner'], $_REQUEST['loser'], $_REQUEST['index']);
     exit;
 }
 
@@ -162,12 +162,13 @@ if ($_REQUEST['get'] == 'source') {
     <?php output_template("first.html"); ?>
     </div><?php
 $images = get_images();
+$saved_pair;
 
 for ($i = 0; $i < $pairs; $i++) {
     $pair = pick_pair($images);
     if($repeat > 0 && $i == $pairs-1){
             $pair = $saved_pair;
-    }else if($i == $repeat){
+    }else if($i == $repeat - 1){
             $saved_pair = array_reverse($pair);
     }
 ?>

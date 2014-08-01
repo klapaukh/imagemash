@@ -46,7 +46,8 @@ function start(){
 function imageClicked() {
     var me = this.dataset.me;
     var other = this.dataset.other;
-    logBeat(me, other);
+    var count = document.getElementById('counter-upto').innerHTML;
+    logBeat(me, other,count);
     pairs[activePairIndex++].classList.remove('active');
     pairs[activePairIndex].classList.add('active');
     if (activePairIndex < pairs.length - 1) {
@@ -56,15 +57,15 @@ function imageClicked() {
     }
 }
 
-function logBeat(winner, loser) {
+function logBeat(winner, loser,index) {
     var log = document.getElementById('log');
     if (log) {
         var li = document.createElement('li');
-        li.appendChild(document.createTextNode(winner + ' beat ' + loser));
+        li.appendChild(document.createTextNode(index + ": " + winner + ' beat ' + loser));
         log.appendChild(li);
     }
-    console.log(winner + ' beat ' + loser);
+    console.log(index + ": " + winner + ' beat ' + loser);
     var req = new XMLHttpRequest();
-    req.open('POST', '?winner=' + winner + '&loser=' + loser, true);
+    req.open('POST', '?winner=' + winner + '&loser=' + loser + '&index=' + index, true);
     req.send(token);
 }
