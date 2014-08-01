@@ -5,7 +5,7 @@ pick several unique pairs of image to show each user and record which of
 the pair they chose.
 
 Results are recorded into results.txt in the format:
-  left,right,winner,loser,sessionID
+  side,number,winner,loser,sessionID
 where the names are derived from the image filenames.
 
 You can set what the images should be referred to ask, what property
