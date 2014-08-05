@@ -74,7 +74,7 @@ function log_winner($winner, $loser, $side, $index,$pairs) {
 
 function generate_zip() {
     $files = array(
-        "index.php",
+        "survey.php",
         "imagemash.css",
         "imagemash.js",
         "config.php",
